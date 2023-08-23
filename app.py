@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import os
 
-st.set_page_config("Streamlit Components Hub", "🎪", layout="wide")
+st.set_page_config("Fiat Peças BSB", "⚙️", layout="wide")
 
 #Título
 st.markdown('## Ofertas de Peças - Rede de Concessionárias do Regional Brasília')
