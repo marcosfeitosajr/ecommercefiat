@@ -5,6 +5,9 @@ import os
 
 st.set_page_config("Streamlit Components Hub", "🎪", layout="wide")
 
+#Título
+st.markdown('## Ofertas de Peças - Rede de Concessionárias do Regional Brasília')
+
 #carregar o dataframe
 pasta_atual = os.getcwd()
 arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx")
