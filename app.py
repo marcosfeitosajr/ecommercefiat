@@ -4,7 +4,7 @@ import pandas as pd
 import os
 
 st.set_page_config("Fiat Peças BSB", "⚙️", layout="wide")
-st.image('./FIAT_LOGO.png', width=300)
+st.image('./FIAT_LOGO.png', width=150)
 
 #Título
 st.markdown('## Ofertas de Peças - Rede de Concessionárias do Regional Brasília')
