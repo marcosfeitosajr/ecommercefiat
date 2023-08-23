@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import os
 
-st.set_page_config("Fiat Peças BSB", "⚙️", layout="wide")
+st.set_page_config("Fiat Peças BSB", "⚙️")
 st.image('./FIAT_LOGO.png', width=100)
 
 #Título
