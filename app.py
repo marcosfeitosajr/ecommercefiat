@@ -9,7 +9,7 @@ st.image('./FIAT_LOGO.png', width=100)
 #Título
 st.markdown('## Ofertas de Peças - Rede de Concessionárias do Regional Brasília')
 st.write('Este site é uma plataforma de compartilhamento de ofertas entre concessionárias. As concessionárias participantes podem enviar a lista de peças que desejam ofertar ao seu Consultor de Pós-Vendas do Regional Brasília, dando visibilidade aos seus itens para toda a rede do Regional Brasília, já com o preço de oferta. A ferramenta tem como objetivo aumentar o sell-out das concessionárias, permitindo que itens sejam adquiridos entre as próprias concessionárias, caso a oferta seja conveniente. \nA adesão é livre. Todas que quiserem expor suas ofertas podem participar, bastando enviar a lista ao seu CPV.')
-st.warning('')
+st.error('')
 
 #carregar o dataframe
 pasta_atual = os.getcwd()
@@ -29,8 +29,8 @@ if condicao == True:
 
     #opção de download da lista completa
 
-st.warning('')
+st.error('')
 st.download_button('Download da lista completa', arquivo)
-st.warning('')
+st.error('')
 st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente.')
 st.write('Para dúvidas ou sugestões, falar com Marcos Feitosa (marcos.feitosa@stellantis.com) ou Bruno Schmeisck (bruno.schmeisck@stellantis.com).')
