@@ -29,4 +29,5 @@ if condicao == True:
 
 st.download_button('Download da lista completa', arquivo)
 
-st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente. Ass. Feitosa')
+st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente.')
+st.write('Para dúvidas ou sugestões, falar com Marcos Feitosa (marcos.feitosa@stellantis.com) ou Bruno Schmeisk (bruno.schmeisck@stellantis.com).')
