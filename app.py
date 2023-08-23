@@ -4,7 +4,7 @@ import pandas as pd
 import os
 
 st.set_page_config("Fiat Peças BSB", "⚙️", layout="wide")
-st.image('./FIAT_LOGO.png')
+st.image('./FIAT_LOGO.png', width=300))
 
 #Título
 st.markdown('## Ofertas de Peças - Rede de Concessionárias do Regional Brasília')
@@ -31,4 +31,4 @@ if condicao == True:
 st.download_button('Download da lista completa', arquivo)
 
 st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente.')
-st.write('Para dúvidas ou sugestões, falar com Marcos Feitosa (marcos.feitosa@stellantis.com) ou Bruno Schmeisk (bruno.schmeisck@stellantis.com).')
+st.write('Para dúvidas ou sugestões, falar com Marcos Feitosa (marcos.feitosa@stellantis.com) ou Bruno Schmeisck (bruno.schmeisck@stellantis.com).')
