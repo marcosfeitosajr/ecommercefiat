@@ -7,7 +7,9 @@ st.set_page_config("Streamlit Components Hub", "🎪", layout="wide")
 
 #Título
 st.markdown('## Ofertas de Peças - Rede de Concessionárias do Regional Brasília')
+st.text('Este site é uma plataforma de compartilhamento de ofertas entre concessionárias. As concessionárias participantes podem enviar a lista de peças que desejam ofertar ao seu Consultor de Pós-Vendas do Regional Brasília, dando visibilidade aos seus itens para toda a rede do Regional Brasília, já com o preço de oferta. A ferramenta tem como objetivo aumentar o sell-out das concessionárias, permitindo que itens sejam adquiridos entre as próprias concessionárias, caso a oferta seja conveniente.
 
+A adesão é livre. Todas que quiserem expor suas ofertas podem participar, bastando enviar a lista ao seu CPV.')
 #carregar o dataframe
 pasta_atual = os.getcwd()
 arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx")
