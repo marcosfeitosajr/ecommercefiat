@@ -28,3 +28,5 @@ if condicao == True:
 
 
 st.download_button('Download da lista completa', arquivo)
+
+st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente. Ass. Feitosa')
