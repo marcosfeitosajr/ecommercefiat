@@ -33,8 +33,9 @@ if condicao == True:
 
 st.error('')
 
+teste = df_pecas.to_excel('teste.xlsx)
 
-st.download_button("Download da lista completa",arquivo)
+st.download_button("Download da lista completa",teste)
 
 st.error('')
 st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente.')
