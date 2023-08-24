@@ -37,12 +37,7 @@ output = io.BytesIO()
 with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
     df_pecas.to_excel(writer, sheet_name='Sheet1', index=False)
 
-st.download_button(
-    label="Download da lista completa",
-    data=output.getvalue(),
-    file_name="OPORTUNIDADES_SEM_GIRO_DEALER.xlsx",
-    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-)
+st.download_button("Download da lista completa",arquivo)
 
 st.error('')
 st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente.')
