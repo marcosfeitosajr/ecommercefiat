@@ -30,7 +30,7 @@ if condicao == True:
     #opção de download da lista completa
 
 st.error('')
-st.download_button('Download da lista completa', arquivo)
+st.download_button('Download da lista completa', arquivo, mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', file_name='OPORTUNIDADES_SEM_GIRO_DEALER.xlsx')
 st.error('')
 st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente.')
 st.write('Para dúvidas ou sugestões, falar com Marcos Feitosa (marcos.feitosa@stellantis.com) ou Bruno Schmeisck (bruno.schmeisck@stellantis.com).')
