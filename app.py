@@ -33,9 +33,6 @@ if condicao == True:
 
 st.error('')
 
-output = io.BytesIO()
-with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-    df_pecas.to_excel(writer, sheet_name='Sheet1', index=False)
 
 st.download_button("Download da lista completa",arquivo)
 
