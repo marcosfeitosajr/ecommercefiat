@@ -33,7 +33,7 @@ if condicao == True:
 
 st.error('')
 
-teste = df_pecas.to_excel('teste.xlsx)
+teste = df_pecas.to_excel('teste.xlsx')
 
 st.download_button("Download da lista completa",teste)
 
