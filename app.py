@@ -12,8 +12,7 @@ st.write('Este site é uma plataforma de compartilhamento de ofertas entre conce
 st.error('')
 
 #carregar o dataframe
-pasta_atual = os.getcwd()
-arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx")
+arquivo = "OPORTUNIDADES SEM GIRO DEALER.xlsx"
 df_pecas = pd.read_excel(arquivo, dtype={"DESENHO": str})
 
 #barra de pesquisa
