@@ -13,29 +13,32 @@ st.markdown('## Ofertas de Peças - Rede de Concessionárias do Regional Brasíl
 st.write('Este site é uma plataforma de compartilhamento de ofertas entre concessionárias. As concessionárias participantes podem enviar a lista de peças que desejam ofertar ao seu Consultor de Pós-Vendas do Regional Brasília, dando visibilidade aos seus itens para toda a rede do Regional Brasília, já com o preço de oferta. A ferramenta tem como objetivo aumentar o sell-out das concessionárias, permitindo que itens sejam adquiridos entre as próprias concessionárias, caso a oferta seja conveniente. \nA adesão é livre. Todas que quiserem expor suas ofertas podem participar, bastando enviar a lista ao seu CPV.')
 st.error('')
 
-#carregar o dataframe
-pasta_atual = os.getcwd()
-arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx")
-df_pecas = pd.read_excel(arquivo, dtype={"DESENHO": str})
+def main():
+    # Carregar o dataframe
+    pasta_atual = os.getcwd()
+    arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx")
+    df_pecas = pd.read_excel(arquivo, dtype={"DESENHO": str})
 
-#barra de pesquisa
-part_number = st.text_input('Informe o número do desenho: ')
+    # Barra de pesquisa
+    part_number = st.text_input('Informe o número do desenho: ')
 
-condicao = st.button('Pesquisar')
+    # Botão de pesquisa
+    if st.button('Pesquisar'):
+        # Filtrar o dataframe pelo número do desenho
+        resultado = df_pecas[df_pecas['DESENHO'] == part_number]
+        
+        if not resultado.empty:
+            st.dataframe(resultado)
+            # Opção de download da lista filtrada
+            st.download_button('Download da lista filtrada', data=resultado.to_csv(index=False), file_name='resultado_filtrado.csv', mime='text/csv')
+        else:
+            st.warning("Nenhum resultado encontrado para o número de desenho informado.")
 
-if condicao == True:
-    #Retorno é uma lista das ofertas daquele item
-    resultado = df_pecas.loc[df_pecas['DESENHO'] == part_number]
+    # Botão de download da lista completa
+    st.download_button('Download da lista completa', data=df_pecas.to_csv(index=False), file_name='lista_completa.csv', mime='text/csv')
 
-    st.dataframe(resultado)
-
-    #opção de download da lista completa
-
-st.error('')
-
-teste = df_pecas.to_excel('teste.xlsx')
-
-st.download_button("Download da lista completa",teste)
+if __name__ == "__main__":
+    main()
 
 st.error('')
 st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente.')
