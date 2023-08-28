@@ -16,7 +16,7 @@ st.error('')
 def main():
     # Carregar o dataframe
     pasta_atual = os.getcwd()
-    arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx")
+    arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx", dtype=columns={'CELULAR' : str})
     df_pecas = pd.read_excel(arquivo, dtype={"DESENHO": str})
 
     # Barra de pesquisa
