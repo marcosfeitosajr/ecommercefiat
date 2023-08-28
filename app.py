@@ -31,9 +31,13 @@ def main():
             st.download_button('Download da lista de' + part_number, data=resultado.to_excel(index=False), file_name='resultado_' + part_number + '.xlsx')
         else:
             st.warning("Nenhum resultado encontrado para o número de desenho informado.")
-
+    
+    output = io.BytesIO()
+    df_pecas.to_excel(output, index=False)
+    output.seek(0)
+    
     # Botão de download
-    st.download_button('Download da lista completa', data=df_pecas, file_name='lista_completa.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    st.download_button('Download da lista completa', data=output, file_name='lista_completa.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 if __name__ == "__main__":
     main()
