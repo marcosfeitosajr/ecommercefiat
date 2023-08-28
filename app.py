@@ -31,7 +31,7 @@ def main():
             data = io.BytesIO()
             lista_pecas.to_excel(data, index=False)
             data.seek(0)
-            st.download_button('Download da lista de' + part_number, data=data, file_name='resultado_' + part_number + '.xlsx')
+            st.download_button('Download da lista de ' + part_number, data=data, file_name='resultado_' + part_number + '.xlsx')
         else:
             st.warning("Nenhum resultado encontrado para o número de desenho informado.")
     
