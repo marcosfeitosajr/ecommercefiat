@@ -28,7 +28,10 @@ def main():
         
         if not lista_pecas.empty:
             st.dataframe(lista_pecas)
-            st.download_button('Download da lista de' + part_number, data=lista_pecas.to_excel(index=False), file_name='resultado_' + part_number + '.xlsx')
+            data = io.BytesIO()
+            lista_pecas.to_excel(data, index=False)
+            data.seek(0)
+            st.download_button('Download da lista de' + part_number, data=data, file_name='resultado_' + part_number + '.xlsx')
         else:
             st.warning("Nenhum resultado encontrado para o número de desenho informado.")
     
