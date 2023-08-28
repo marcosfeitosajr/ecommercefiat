@@ -26,9 +26,9 @@ def main():
     if st.button('Pesquisar'):
         lista_pecas = df_pecas[df_pecas['DESENHO'] == part_number]
         
-        if not resultado.empty:
+        if not lista_pecas.empty:
             st.dataframe(lista_pecas)
-            st.download_button('Download da lista de' + part_number, data=resultado.to_excel(index=False), file_name='resultado_' + part_number + '.xlsx')
+            st.download_button('Download da lista de' + part_number, data=lista_pecas.to_excel(index=False), file_name='resultado_' + part_number + '.xlsx')
         else:
             st.warning("Nenhum resultado encontrado para o número de desenho informado.")
     
