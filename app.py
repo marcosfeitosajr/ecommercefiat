@@ -24,18 +24,16 @@ def main():
 
     # Botão de pesquisa
     if st.button('Pesquisar'):
-        # Filtrar o dataframe pelo número do desenho
-        resultado = df_pecas[df_pecas['DESENHO'] == part_number]
+        lista_pecas = df_pecas[df_pecas['DESENHO'] == part_number]
         
         if not resultado.empty:
-            st.dataframe(resultado)
-            # Opção de download da lista filtrada
-            st.download_button('Download da lista filtrada', data=resultado.to_csv(index=False), file_name='resultado_filtrado.csv', mime='text/csv')
+            st.dataframe(lista_pecas)
+            st.download_button('Download da lista de' + part_number, data=resultado.to_excel(index=False), file_name='resultado_' + part_number + '.xlsx')
         else:
             st.warning("Nenhum resultado encontrado para o número de desenho informado.")
 
     # Botão de download da lista completa
-    st.download_button('Download da lista completa', data=df_pecas.to_csv(index=False), file_name='lista_completa.csv', mime='text/csv')
+    st.download_button('Download da lista completa', data=df_pecas.to_excel(index=False), file_name='lista_completa.xlsx')
 
 if __name__ == "__main__":
     main()
