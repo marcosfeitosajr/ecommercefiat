@@ -32,8 +32,8 @@ def main():
         else:
             st.warning("Nenhum resultado encontrado para o número de desenho informado.")
 
-    # Botão de download da lista completa
-    st.download_button('Download da lista completa', data=df_pecas.to_excel(index=False), file_name='lista_completa.xlsx')
+    # Botão de download
+    st.download_button('Download da lista completa', data=output, file_name='lista_completa.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 if __name__ == "__main__":
     main()
