@@ -16,8 +16,8 @@ st.error('')
 def main():
     # Carregar o dataframe
     pasta_atual = os.getcwd()
-    arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx", dtype=columns={'CELULAR' : str})
-    df_pecas = pd.read_excel(arquivo, dtype={"DESENHO": str})
+    arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx")
+    df_pecas = pd.read_excel(arquivo, dtype={"DESENHO": str, "CELULAR" : str})
 
     # Barra de pesquisa
     part_number = st.text_input('Informe o número do desenho: ')
