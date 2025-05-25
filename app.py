@@ -1,50 +1,50 @@
-#Importar bibliotecas
 import streamlit as st
+import pdfplumber
+import re
 import pandas as pd
-import io
+from io import BytesIO
 
-import os
+st.set_page_config(page_title="Agrupador de Lançamentos", layout="wide")
+st.title("📊 Agrupador de Lançamentos Bancários")
 
-st.set_page_config("Fiat Peças BSB", "⚙️")
-st.image('./FIAT_LOGO.png', width=100)
+uploaded_file = st.file_uploader("📥 Faça upload do seu arquivo PDF", type=["pdf"])
 
-#Título
-st.markdown('## Ofertas de Peças - Rede de Concessionárias do Regional Brasília')
-st.write('Este site é uma plataforma de compartilhamento de ofertas entre concessionárias. As concessionárias participantes podem enviar a lista de peças que desejam ofertar ao seu Consultor de Pós-Vendas do Regional Brasília, dando visibilidade aos seus itens para toda a rede do Regional Brasília, já com o preço de oferta. A ferramenta tem como objetivo aumentar o sell-out das concessionárias, permitindo que itens sejam adquiridos entre as próprias concessionárias, caso a oferta seja conveniente. \nA adesão é livre. Todas que quiserem expor suas ofertas podem participar, bastando enviar a lista ao seu CPV.')
-st.error('')
+if uploaded_file:
+    bytes_data = uploaded_file.read()
+    text = ""
+    with pdfplumber.open(BytesIO(bytes_data)) as pdf:
+        for page in pdf.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text + "\n"
 
-def main():
-    # Carregar o dataframe
-    pasta_atual = os.getcwd()
-    arquivo = os.path.join(pasta_atual, "OPORTUNIDADES SEM GIRO DEALER.xlsx")
-    df_pecas = pd.read_excel(arquivo, dtype={"DESENHO": str, "CELULAR" : str})
+    # Expressão regular para capturar data, descrição e valor
+    pattern = re.compile(r"(\d{2}-\d{2}-\d{4})\s+(.+?)\s+\d+\s+R\$ ([\-\d\.,]+)", re.DOTALL)
+    records = []
+    for date, desc, raw_val in pattern.findall(text):
+        # Normaliza e converte valor
+        valor = float(raw_val.replace('.', '').replace(',', '.'))
+        # Limpa descrição
+        desc = desc.replace("\n", " ").strip()
+        # Aplica regra especial
+        if desc.startswith("Pagamento com Código QR Pix") or desc == "Liberação de dinheiro":
+            desc = "Receita por produtos"
+        records.append((date, desc, valor))
 
-    # Barra de pesquisa
-    part_number = st.text_input('Informe o número do desenho: ')
+    # Cria DataFrame e agrupa
+    df = pd.DataFrame(records, columns=["Data", "Descrição", "Valor"] )
+    grouped = df.groupby(["Data", "Descrição"], as_index=False).sum()
+    # Formata valor com duas casas decimais
+    grouped["Valor Total (R$)"] = grouped["Valor"].map(lambda x: f"{x:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."))
+    result = grouped[["Data", "Descrição", "Valor Total (R$)"]]
 
-    # Botão de pesquisa
-    if st.button('Pesquisar'):
-        lista_pecas = df_pecas[df_pecas['DESENHO'] == part_number]
-        
-        if not lista_pecas.empty:
-            st.dataframe(lista_pecas)
-            data = io.BytesIO()
-            lista_pecas.to_excel(data, index=False)
-            data.seek(0)
-            st.download_button('Download da lista de ' + part_number, data=data, file_name='resultado_' + part_number + '.xlsx')
-        else:
-            st.warning("Nenhum resultado encontrado para o número de desenho informado.")
-    
-    output = io.BytesIO()
-    df_pecas.to_excel(output, index=False)
-    output.seek(0)
-    
-    # Botão de download
-    st.download_button('Download da lista completa', data=output, file_name='lista_completa.xlsx', mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-
-if __name__ == "__main__":
-    main()
-
-st.error('')
-st.write('Este site é uma PoC (Prova de Conceito), não utlize este site oficialmente.')
-st.write('Para dúvidas ou sugestões, falar com Marcos Feitosa (marcos.feitosa@stellantis.com) ou Bruno Schmeisck (bruno.schmeisck@stellantis.com).')
+    # Exibe e permite download
+    st.subheader("📋 Resultado Agrupado")
+    st.dataframe(result, use_container_width=True)
+    csv = result.to_csv(index=False, sep=';')
+    st.download_button(
+        label="⬇️ Baixar CSV",
+        data=csv,
+        file_name="agrupado_lancamentos.csv",
+        mime="text/csv"
+    )
